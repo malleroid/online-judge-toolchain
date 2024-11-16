@@ -851,6 +851,7 @@ dependencies = [
  "log",
  "predicates",
  "reqwest",
+ "serde",
  "tokio",
 ]
 
