@@ -29,39 +29,39 @@ enum Commands {
 }
 
 fn main() {
-    // Initialize logging
-    env_logger::init();
+    env_logger::Builder::new()
+        .filter_level(log::LevelFilter::Info)
+        .init();
+
     let cli = Cli::parse();
 
     if cli.verbose {
-        env_logger::builder()
-            .filter_level(log::LevelFilter::Debug)
-            .init();
+        log::set_max_level(log::LevelFilter::Debug);
     }
 
     match cli.command {
         Commands::Login => {
-            info!("Running the login command...");
+            log::info!("Running the login command...");
             // Call the login module
         }
         Commands::Download => {
-            info!("Running the download command...");
+            log::info!("Running the download command...");
             // Call the download module
         }
         Commands::Submit => {
-            info!("Running the submit command...");
+            log::info!("Running the submit command...");
             // Call the submit module
         }
         Commands::Test => {
-            info!("Running the test command...");
+            log::info!("Running the test command...");
             // Call the test module
         }
         Commands::GenerateInput => {
-            info!("Generating input files...");
+            log::info!("Generating input files...");
             // Call the generate_input module
         }
         Commands::GenerateOutput => {
-            info!("Generating output files...");
+            log::info!("Generating output files...");
             // Call the generate_output module
         }
     }
