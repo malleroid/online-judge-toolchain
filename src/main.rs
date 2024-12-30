@@ -1,3 +1,6 @@
+mod api;
+mod commands;
+
 use clap::{Parser, Subcommand};
 use env_logger;
 use log::info;
@@ -15,7 +18,16 @@ struct Cli {
 #[derive(Subcommand)]
 enum Commands {
     // Login to the platform
-    Login,
+    Login {
+        #[arg(short, long)]
+        service: String,
+
+        #[arg(short, long)]
+        username: String,
+
+        #[arg(short, long)]
+        password: String,
+    },
     // Download problem data
     Download,
     // Submit the solution
@@ -28,7 +40,8 @@ enum Commands {
     GenerateOutput,
 }
 
-fn main() {
+#[tokio::main]
+async fn main() {
     env_logger::Builder::new()
         .filter_level(log::LevelFilter::Info)
         .init();
@@ -40,9 +53,15 @@ fn main() {
     }
 
     match cli.command {
-        Commands::Login => {
+        Commands::Login {
+            service,
+            username,
+            password,
+        } => {
             log::info!("Running the login command...");
-            // Call the login module
+            if let Err(e) = commands::login::login_command(&service, &username, &password).await {
+                log::error!("Error: {}", e);
+            }
         }
         Commands::Download => {
             log::info!("Running the download command...");
