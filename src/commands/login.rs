@@ -1,18 +1,24 @@
 use crate::api::{atcoder::AtCoder, service::ServiceLogin};
 use reqwest::Client;
+use rpassword::prompt_password;
 use std::error::Error;
 
 pub async fn login_command(
     service_name: &str,
     username: &str,
-    password: &str,
+    password: Option<&str>,
 ) -> Result<(), Box<dyn Error>> {
+    let password = match password {
+        Some(password) => password.to_string(),
+        None => prompt_password("Password: ").unwrap(),
+    };
+
     let client = Client::builder().cookie_store(true).build()?;
 
     match service_name {
         "atcoder" => {
             let atcoder = AtCoder;
-            let result = atcoder.login(&client, username, password).await?;
+            let result = atcoder.login(&client, username, &password).await?;
             if result.success {
                 println!(
                     "{}",

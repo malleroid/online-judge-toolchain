@@ -26,7 +26,7 @@ enum Commands {
         username: String,
 
         #[arg(short, long)]
-        password: String,
+        password: Option<String>,
     },
     // Download problem data
     Download,
@@ -59,7 +59,9 @@ async fn main() {
             password,
         } => {
             log::info!("Running the login command...");
-            if let Err(e) = commands::login::login_command(&service, &username, &password).await {
+            if let Err(e) =
+                commands::login::login_command(&service, &username, password.as_deref()).await
+            {
                 log::error!("Error: {}", e);
             }
         }
