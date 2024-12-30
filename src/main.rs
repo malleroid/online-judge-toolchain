@@ -1,5 +1,6 @@
 mod api;
 mod commands;
+mod session;
 
 use clap::{Parser, Subcommand};
 use env_logger;

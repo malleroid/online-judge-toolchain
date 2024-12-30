@@ -1,5 +1,5 @@
 use crate::api::{atcoder::AtCoder, service::ServiceLogin};
-use reqwest::Client;
+use crate::session::SessionManager;
 use rpassword::prompt_password;
 use std::error::Error;
 
@@ -13,7 +13,8 @@ pub async fn login_command(
         None => prompt_password("Password: ").unwrap(),
     };
 
-    let client = Client::builder().cookie_store(true).build()?;
+    let session_manager = SessionManager::new();
+    let client = session_manager.create_client()?;
 
     match service_name {
         "atcoder" => {
@@ -24,6 +25,7 @@ pub async fn login_command(
                     "{}",
                     result.message.unwrap_or("Login successful!".to_string())
                 );
+                session_manager.save_service_session(service_name)?;
             } else {
                 println!("{}", result.message.unwrap_or("Login failed.".to_string()));
             }
