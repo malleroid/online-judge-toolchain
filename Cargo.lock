@@ -1035,6 +1035,7 @@ version = "0.1.0"
 dependencies = [
  "assert_cmd",
  "clap",
+ "cookie_store",
  "env_logger",
  "log",
  "predicates",
