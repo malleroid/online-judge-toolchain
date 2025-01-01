@@ -14,3 +14,12 @@ pub trait ServiceLogin {
         password: &str,
     ) -> Result<LoginResult, Box<dyn Error>>;
 }
+
+pub trait ServiceDownload {
+    async fn download(
+        &self,
+        client: &Client,
+        contest_id: &str,
+        output_dir: Option<&str>,
+    ) -> Result<(), Box<dyn Error>>;
+}
