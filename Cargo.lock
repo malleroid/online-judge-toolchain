@@ -1071,6 +1071,7 @@ dependencies = [
  "env_logger",
  "log",
  "predicates",
+ "regex",
  "reqwest",
  "reqwest_cookie_store",
  "rpassword",
