@@ -1,6 +1,7 @@
 mod api;
 mod commands;
 mod session;
+mod utils;
 
 use clap::{Parser, Subcommand};
 use env_logger;
@@ -30,7 +31,16 @@ enum Commands {
         password: Option<String>,
     },
     // Download problem data
-    Download,
+    Download {
+        #[arg(short, long)]
+        service: String,
+
+        #[arg(short, long)]
+        contest_id: String,
+
+        #[arg(short, long)]
+        output_dir: Option<String>,
+    },
     // Submit the solution
     Submit,
     // Run test cases
@@ -66,9 +76,18 @@ async fn main() {
                 log::error!("Error: {}", e);
             }
         }
-        Commands::Download => {
+        Commands::Download {
+            service,
+            contest_id,
+            output_dir,
+        } => {
             log::info!("Running the download command...");
-            // Call the download module
+            if let Err(e) =
+                commands::download::download_command(&service, &contest_id, output_dir.as_deref())
+                    .await
+            {
+                log::error!("Error: {}", e);
+            }
         }
         Commands::Submit => {
             log::info!("Running the submit command...");
