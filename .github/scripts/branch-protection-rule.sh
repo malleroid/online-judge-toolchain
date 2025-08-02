@@ -5,7 +5,7 @@ REPO="online-judge-toolchain"
 RULE_NAME="Main Branch Protection Rule"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CONFIG_FILE="$SCRIPT_DIR/branch-ruleset.json"
+CONFIG_FILE="$SCRIPT_DIR/../rulesets/main-branch.json"
 
 if [ ! -f "$CONFIG_FILE" ]; then
   echo "Error: Configuration file not found at $CONFIG_FILE"
