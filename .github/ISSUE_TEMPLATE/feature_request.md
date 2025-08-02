@@ -1,7 +1,7 @@
 ---
 name: ✨ Feature Request
-about:
-title:
+about: suggest an idea for this project
+title: [Feature Request]
 labels: enhancement
 assignees: ""
 ---
