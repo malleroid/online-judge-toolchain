@@ -1,7 +1,7 @@
 ---
 name: 🐛 Bug Report
-about:
-title:
+about: create a report to help us improve
+title: "[Bug Report]"
 labels: bug
 assignees: ""
 ---
