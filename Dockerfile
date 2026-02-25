@@ -1,4 +1,4 @@
-FROM rust:1.93.1-bookworm@sha256:52abdd7111dc410daf146085246ffa4b59ccecefc8b2b702e1aab6f06d6abdcf
+FROM rust:1.93.1-bookworm@sha256:7c4ae649a84014c467d79319bbf17ce2632ae8b8be123ac2fb2ea5be46823f31
 
 WORKDIR /usr/src/app
 
